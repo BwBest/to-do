@@ -7,12 +7,21 @@ function Project(projectName) {
   this.objects = [];
 }
 
-function createNewTask(project, title, description, dueDate, priority, notes) {
-  console.log('New Task Generated');
+function Task(title, description, dueDate, priority, notes) {
+  this.title = title;
+  this.description = description;
+  this.dueDate = dueDate;
+  this.priority = priority;
+  this.notes = notes;
 }
 
-function initalize() {
-  firstTimeTest();
+function firstTimeTest() {
+  if (storage.isFirstTimeLoad() === false) return; // Skip if it's not first time loading
+  // Create default project if it's the first time
+  const defaultProject = new Project('Default Project');
+  projects.push(defaultProject);
+
+  // Create a example task
   createNewTask(
     'Default Project',
     'Başlık',
@@ -23,12 +32,23 @@ function initalize() {
   );
 }
 
-function firstTimeTest() {
-  if (storage.isFirstTimeLoad() === false) return; // Skip if it's not first time loading
+function createNewTask(project, title, description, dueDate, priority, notes) {
+  const task = new Task(title, description, dueDate, priority, notes);
+  // Find the project object
+  let assignedProject;
+  projects.forEach((element) => {
+    if (element.projectName === project) {
+      assignedProject = element;
+    }
+  });
+  // Add task to project object if the 'project' input is available
+  if (assignedProject !== null) {
+    assignedProject.objects.push(task);
+  }
 }
 
-storage.clearSaves();
-
-console.log(storage.isFirstTimeLoad());
+function initalize() {
+  firstTimeTest();
+}
 
 export { initalize };
