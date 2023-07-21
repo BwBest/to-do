@@ -1,1 +1,1 @@
-console.log("Hello");
+(()=>{"use strict";const t=()=>null===localStorage.getItem("projects"),e=[];function i(t){this.projectName=t,this.objects=[]}function o(t,e,i,o,s){this.title=t,this.description=e,this.dueDate=i,this.priority=o,this.notes=s}!function(){if(!1===t())return;const s=new i("Default Project");e.push(s),function(t,i,s,n,c,r){const l=new o("Başlık","Deneme açıklaması","2bdone","high","Gelirse ekime");let u;e.forEach((t=>{"Default Project"===t.projectName&&(u=t)})),null!==u&&u.objects.push(l)}()}()})();
