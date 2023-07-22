@@ -4,12 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To do or not to do</title>
-    <script src="./index.bundle.js" defer></script>
+    <script src="https://kit.fontawesome.com/c6ac019527.js" crossorigin="anonymous"></script>
 <script defer src="index.bundle.js"></script></head>
 <body>
     <div class="container">
-        <div class="left" id="left"></div>
-        <div class="right" id="right"></div>
+        <div id="left">
+            <div class="profile">
+                <img src="">
+                <h3 id="profile-name">Abuzer K.</h3>
+            </div>
+            <div class="view-type">
+                <h3 class="active-text">Today</h3>
+                <h3 class="white-text">This Week</h3>
+                <h3 class="white-text">This Month</h3>
+            </div>
+            <div class="categories">
+                <div class="categories-title">
+                    <div>
+                        <h2>Categories</h2>
+                        <i class="fa-regular fa-circle-plus" style="color: #ffffff;"></i>
+                    </div>
+                    <div class="categories-divider"></div>
+                </div>
+                <h3 class="active-text">Work</h3>
+                <h3 class="white-text">Classes</h3>
+                <h3 class="white-text">Appointments</h3>
+            </div>
+        </div>
+        <div id="right">
+            <div class="header">
+                <h1 id="title">Today</h1>
+                <p id="date">22.07.2023</p>
+            </div>
+
+            <div class="task-box">
+                <input type="checkbox" class="checkbox">
+                <div>
+                    <h2 id="task-title">Example Task</h2>
+                    <p id="task-desc">Walk the dog and buy some food</p>
+                </div>
+                <div class="priority hidden">High priority</div>
+                <i class="fa-light fa-calendar"></i>
+                <p id="task-date">22.07.2023</p>
+                <div>
+                    <i class="fa-solid fa-chevron-down"></i>
+                    <i class="fa-regular fa-pen-to-square hidden"></i>
+                </div>
+            </div>
+
+            <div class="bottom">
+                <button id="add-task">
+                    <i class="fa-regular fa-circle-plus" style="color: #ffffff;"></i>
+                    Add Task
+                </button>
+            </div>
+        </div>
     </div>
 </body>
 </html>
