@@ -1,6 +1,7 @@
 import { storage } from './saveSystem.js';
 
-const projects = [];
+let projects = [];
+let loaded = false;
 
 function Project(projectName) {
   this.projectName = projectName;
@@ -21,6 +22,8 @@ function firstTimeTest() {
   const defaultProject = new Project('Default Project');
   projects.push(defaultProject);
 
+  loaded = true;
+
   // Create a example task
   createNewTask(
     'Default Project',
@@ -30,9 +33,21 @@ function firstTimeTest() {
     'high',
     'Gelirse ekime'
   );
+
+  // Save the task and project
+  storage.save(projects);
+
+  console.log('LOADED FIRST TIME');
 }
 
 function createNewTask(project, title, description, dueDate, priority, notes) {
+  if (loaded === false) {
+    // Call the newtask function 1s later if the saves not loaded yet
+    setTimeout(() => {
+      createNewTask(project, title, description, dueDate, priority, notes);
+    }, 1000);
+    return;
+  }
   const task = new Task(title, description, dueDate, priority, notes);
   // Find the project object
   let assignedProject;
@@ -45,10 +60,19 @@ function createNewTask(project, title, description, dueDate, priority, notes) {
   if (assignedProject !== null) {
     assignedProject.objects.push(task);
   }
+  // Save the task and projects
+  storage.save(projects);
 }
 
 function initalize() {
+  loadTasks();
   firstTimeTest();
+}
+
+function loadTasks() {
+  if (storage.isFirstTimeLoad() === true) return; // skip if it's the first time loading
+  projects = storage.load();
+  loaded = true;
 }
 
 export { initalize };
