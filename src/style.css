@@ -60,10 +60,10 @@ p{
 .flex-align-center{
     align-items: center;
 }
-/* 
+ 
 .hidden{
     display: none;
-} */
+}
 
 .btn{
     background: var(--primary);
@@ -72,6 +72,8 @@ p{
     border-radius: 0.625rem;
     padding: 0.55rem 1.1rem;
 }
+
+/*************** LAYOUT ***************/
 
 .container{
     width: 85%;
@@ -88,6 +90,10 @@ p{
     background: var(--secondary, #2E2E2E);
     flex: 1;
     padding: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 #right{
@@ -97,7 +103,6 @@ p{
     display: flex;
     flex-direction: column;
 }
-
 
 .header{
     display: flex;
@@ -111,17 +116,52 @@ p{
 .task-view{
     flex: 10;
     overflow-y: scroll;
+    scrollbar-color: var(--secondary);
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+    padding: 0 0.5rem;
 }
 
+.task-view::-webkit-scrollbar {
+    width: 6px;
+}
+  
+.task-view::-webkit-scrollbar-track {
+    background-color: #e6e6e6;
+    border-radius: 10px;
+}
+  
+.task-view::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #dfdfdf;
+    border-radius: 20px;
+}
+
+.bottom{
+    margin-top: 1.5rem;
+    text-align: right;
+}
+/*************** LAYOUT END ***************/
+
+/*************** TASK BOX ***************/
 .task-box{
     border-radius: 0.625rem;
     background: #FFF;
-    box-shadow: 10px 12px 13px 1px rgba(142, 142, 142, 0.05);
+    box-shadow: 10px 12px 13px 1px rgba(142, 142, 142, 0.02);
 
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.task-done .flex{
+    opacity: 0.6;
+}
+
+.task-done h2, .task-done p{
+    text-decoration: line-through;
 }
 
 input[type="checkbox"]{
@@ -154,10 +194,83 @@ input[type="checkbox"]{
     margin-right: 0.7rem;
 }
 
-.bottom{
-    margin-top: 1.5rem;
-    text-align: right;
+.see-more i:nth-child(2){
+    margin-top: 0.6rem;
 }
 
+.task-desc{
+    max-width: 25vw;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 
+.task-box-extended{
+    padding: 2rem 1rem;
 
+    box-shadow: 10px 12px 13px 1px rgba(142, 142, 142, 0.05);
+}
+
+.task-box-extended p{
+    max-width: 40vw;
+    max-width: auto;
+    display: block;
+    overflow: normal;
+    white-space: normal;
+    text-overflow: ellipsis;
+}
+
+.task-box-extended .hidden{
+    display: block;
+}
+
+/*************** TASK BOX END ***************/
+
+/*************** SIDEBAR ***************/
+
+/* Profile section */
+#profile-img{
+    width: 3.75rem;
+    height: 3.75rem;
+    border-radius: 50%;
+}
+
+#profile-name{
+    color: white;
+}
+
+/* .profile{
+
+} */
+/* Profile section end*/
+
+/* View type section */
+/* .view-type{
+
+} */
+/* View type section end */
+
+.categories{
+    margin-bottom: 20vh;
+}
+
+.categories-title{
+    color: white;
+}
+
+.categories-title div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.categories-divider{
+    width: 100%;
+    height: 1px;
+    border-radius: 10px;
+    background: rgba(217, 217, 217, 0.6);
+
+    margin-top: 0.1rem;
+    margin-bottom: 1rem;
+}
