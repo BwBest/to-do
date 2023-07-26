@@ -50,6 +50,11 @@ function renderTaskBox() {
 
   taskBoxDiv.appendChild(leftDiv);
   taskBoxDiv.appendChild(rightDiv);
+
+  const taskView = document.querySelector('.task-view');
+
+  taskView.appendChild(taskBoxDiv);
+  console.log('BASTIK');
 }
 
 /* <div class="task-box task-box-extended">
@@ -71,3 +76,5 @@ function renderTaskBox() {
     </div>
 </div>
 </div> */
+
+export { renderTaskBox };

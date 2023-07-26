@@ -1,4 +1,5 @@
 import { storage } from './saveSystem.js';
+import { renderTaskBox } from './ui.js';
 
 let projects = [];
 let loaded = false;
@@ -62,6 +63,8 @@ function createNewTask(project, title, description, dueDate, priority, notes) {
   }
   // Save the task and projects
   storage.save(projects);
+  // Render the task
+  renderTaskBox();
 }
 
 function initalize() {
