@@ -1,4 +1,9 @@
-function renderTaskBox() {
+function renderTaskBox(
+  title = 'Task Title',
+  desc = 'Task Desc',
+  date = 'Task date',
+  priority = ''
+) {
   const taskBoxDiv = document.createElement('div');
   taskBoxDiv.classList.add('task-box');
 
@@ -21,8 +26,8 @@ function renderTaskBox() {
   const rightDiv = document.createElement('div');
   rightDiv.classList.add('flex', 'flex-align-center');
 
-  const priority = document.createElement('div');
-  priority.classList.add('priority', 'hidden');
+  const priorityEl = document.createElement('div');
+  priorityEl.classList.add('priority', 'hidden');
 
   const claendarIcon = document.createElement('i');
   claendarIcon.classList.add('fa-solid', 'fa-calendar-days');
@@ -43,13 +48,19 @@ function renderTaskBox() {
   seeMore.appendChild(expandButton);
   seeMore.appendChild(editButton);
 
-  rightDiv.appendChild(priority);
+  rightDiv.appendChild(priorityEl);
   rightDiv.appendChild(claendarIcon);
   rightDiv.appendChild(dateText);
   rightDiv.appendChild(seeMore);
 
   taskBoxDiv.appendChild(leftDiv);
   taskBoxDiv.appendChild(rightDiv);
+
+  // Set values
+  taskTitle.textContent = title;
+  taskDesc.textContent = desc;
+  priorityEl.textContent = priority;
+  dateText.textContent = date;
 
   const taskView = document.querySelector('.task-view');
 

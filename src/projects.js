@@ -64,7 +64,7 @@ function createNewTask(project, title, description, dueDate, priority, notes) {
   // Save the task and projects
   storage.save(projects);
   // Render the task
-  renderTaskBox();
+  renderTaskBox(title, description, dueDate, priority);
 }
 
 function initalize() {
@@ -76,6 +76,13 @@ function loadTasks() {
   if (storage.isFirstTimeLoad() === true) return; // skip if it's the first time loading
   projects = storage.load();
   loaded = true;
+
+  // Render loaded tasks to page
+  projects.forEach((project) => {
+    project.objects.forEach((task) => {
+      renderTaskBox(task.title, task.description, task.dueDate, task.priority);
+    });
+  });
 }
 
 export { initalize };
