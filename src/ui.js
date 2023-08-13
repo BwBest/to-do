@@ -6,6 +6,7 @@ function renderTaskBox(
 ) {
   const taskBoxDiv = document.createElement('div');
   taskBoxDiv.classList.add('task-box');
+  taskBoxDiv.addEventListener('click', toogleExtended);
 
   const leftDiv = document.createElement('div');
   leftDiv.classList.add('flex');
@@ -66,6 +67,17 @@ function renderTaskBox(
 
   taskView.appendChild(taskBoxDiv);
   console.log('BASTIK');
+}
+
+function toogleExtended(e) {
+  e.stopPropagation();
+  console.log('HELLO FROM I', e.target, this);
+  if (
+    e.target.classList.contains('task-box') ||
+    e.target.classList.contains('fa-chevron-down')
+  ) {
+    this.classList.toggle('task-box-extended');
+  }
 }
 
 /* <div class="task-box task-box-extended">
