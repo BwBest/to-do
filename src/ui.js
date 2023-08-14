@@ -83,6 +83,7 @@ function toogleExtended(e) {
 function renderAddTaskModal(projectList) {
   // Modal
   const addTaskDiv = document.createElement('div');
+  addTaskDiv.classList.add('modal');
 
   // Modal header
   const modalTitle = document.createElement('h2');
@@ -176,9 +177,39 @@ function renderAddTaskModal(projectList) {
   inputDiv.appendChild(priorityDiv);
   inputDiv.appendChild(projectDiv);
 
+  // Buttons
+  //   <button id="add-task" class="btn">
+  //   <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
+  //   Add Task
+  // </button>
+  const buttonsDiv = document.createElement('div');
+
+  const cancelBtn = document.createElement('button');
+  cancelBtn.textContent = 'Cancel';
+  cancelBtn.classList.add('btn-secondary');
+
+  const addTaskBtn = document.createElement('button');
+  addTaskBtn.id = 'confirm-add-task';
+  addTaskBtn.classList.add('btn');
+  addTaskBtn.textContent = 'Confirm';
+
+  addTaskBtn.style.display = 'flex';
+  addTaskBtn.style.flexDirection = 'row-reverse';
+  addTaskBtn.style.alignItems = 'center';
+
+  const addIcon = document.createElement('i');
+  addIcon.classList = 'fa-solid fa-plus';
+  addIcon.style.color = '#fff';
+
+  addTaskBtn.appendChild(addIcon);
+
+  buttonsDiv.appendChild(cancelBtn);
+  buttonsDiv.appendChild(addTaskBtn);
+
   // Append childs to modal
   addTaskDiv.appendChild(modalTitle);
   addTaskDiv.appendChild(inputDiv);
+  addTaskDiv.appendChild(buttonsDiv);
 
   document.body.appendChild(addTaskDiv);
 }
