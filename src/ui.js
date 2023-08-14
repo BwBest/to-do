@@ -91,6 +91,7 @@ function renderAddTaskModal(projectList) {
 
   // Input div
   const inputDiv = document.createElement('div');
+  inputDiv.classList.add('input-div');
 
   // Title input
   const titleDiv = document.createElement('div');
@@ -178,11 +179,8 @@ function renderAddTaskModal(projectList) {
   inputDiv.appendChild(projectDiv);
 
   // Buttons
-  //   <button id="add-task" class="btn">
-  //   <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
-  //   Add Task
-  // </button>
   const buttonsDiv = document.createElement('div');
+  buttonsDiv.classList.add('buttons-div');
 
   const cancelBtn = document.createElement('button');
   cancelBtn.textContent = 'Cancel';
@@ -196,6 +194,7 @@ function renderAddTaskModal(projectList) {
   addTaskBtn.style.display = 'flex';
   addTaskBtn.style.flexDirection = 'row-reverse';
   addTaskBtn.style.alignItems = 'center';
+  addTaskBtn.style.justifyContent = 'space-between';
 
   const addIcon = document.createElement('i');
   addIcon.classList = 'fa-solid fa-plus';

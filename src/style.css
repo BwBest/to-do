@@ -73,6 +73,14 @@ p{
     padding: 0.55rem 1.1rem;
 }
 
+.btn-secondary{
+    background: none;
+    color: var(--secondary);
+    border: var(--secondary) 2px solid;
+    border-radius: 0.625rem;
+    padding: 0.55rem 1.1rem;
+}
+
 /*************** LAYOUT ***************/
 
 .container{
@@ -142,6 +150,71 @@ p{
     text-align: right;
 }
 /*************** LAYOUT END ***************/
+
+/*************** ADD-EDIT TASK MODAL ***************/
+.modal{
+    background: #fff;
+
+    position: fixed;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 2rem 4rem;
+    border-radius: 0.625rem;
+    box-shadow: 10px 12px 13px 1px rgba(142, 142, 142, 0.05);
+
+    z-index: 2;
+}
+
+.modal h2{
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.modal label{
+    color: var(--secondary);
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+}
+
+.input-div select{
+    background: none;
+}
+
+.input-div input, .input-div select{
+    width: 100%;
+
+    padding: 0.25rem;
+    padding-left: 0.5rem;
+    margin-top: 0.25rem;
+    margin-bottom: 1rem;
+
+    border: none;
+    border-bottom: #727272 1px solid;
+
+    transition: border 0.2s linear;
+}
+
+.input-div input:focus, .input-div select:focus{
+    border-bottom: var(--primary) 1px solid;
+    outline: none;
+}
+
+.input-div{
+    margin-bottom: 1rem;
+}
+
+.buttons-div{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+/*************** ADD-EDIT TASK MODAL END ***************/
 
 /*************** TASK BOX ***************/
 .task-box{

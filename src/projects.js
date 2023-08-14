@@ -85,12 +85,14 @@ function loadTasks() {
   });
 }
 
-if (loaded == true) {
+function addTaskMode() {
+  if (loaded == false) {
+    return;
+  }
   renderAddTaskModal(projects);
-} else {
-  setTimeout(() => {
-    renderAddTaskModal(projects);
-  }, 2000);
 }
+
+// Event listeners
+document.querySelector('#add-task').addEventListener('click', addTaskMode);
 
 export { initalize };
