@@ -1,5 +1,5 @@
 import { storage } from './saveSystem.js';
-import { renderTaskBox } from './ui.js';
+import { renderAddTaskModal, renderTaskBox } from './ui.js';
 
 let projects = [];
 let loaded = false;
@@ -83,6 +83,14 @@ function loadTasks() {
       renderTaskBox(task.title, task.description, task.dueDate, task.priority);
     });
   });
+}
+
+if (loaded == true) {
+  renderAddTaskModal(projects);
+} else {
+  setTimeout(() => {
+    renderAddTaskModal(projects);
+  }, 2000);
 }
 
 export { initalize };
