@@ -59,12 +59,13 @@ function createNewTask(project, title, description, dueDate, priority, notes) {
   });
   // Add task to project object if the 'project' input is available
   if (assignedProject !== null) {
-    assignedProject.objects.push(task);
+    let test = assignedProject.objects.push(task);
+    console.log(test);
   }
   // Save the task and projects
   storage.save(projects);
   // Render the task
-  renderTaskBox(title, description, dueDate, priority);
+  renderTaskBox(title, description, dueDate, priority, task, assignedProject);
 }
 
 function initalize() {
@@ -80,7 +81,16 @@ function loadTasks() {
   // Render loaded tasks to page
   projects.forEach((project) => {
     project.objects.forEach((task) => {
-      renderTaskBox(task.title, task.description, task.dueDate, task.priority);
+      console.log(task);
+      console.log(project);
+      renderTaskBox(
+        task.title,
+        task.description,
+        task.dueDate,
+        task.priority,
+        task,
+        project
+      );
     });
   });
 }
@@ -92,7 +102,29 @@ function addTaskMode() {
   renderAddTaskModal(projects);
 }
 
+function saveAndRefresh() {
+  storage.save(projects);
+
+  document.querySelector('.task-view').innerHTML = '';
+
+  // Render loaded tasks to page
+  projects.forEach((project) => {
+    project.objects.forEach((task) => {
+      console.log(task);
+      console.log(project);
+      renderTaskBox(
+        task.title,
+        task.description,
+        task.dueDate,
+        task.priority,
+        task,
+        project
+      );
+    });
+  });
+}
+
 // Event listeners
 document.querySelector('#add-task').addEventListener('click', addTaskMode);
 
-export { initalize, createNewTask };
+export { initalize, createNewTask, saveAndRefresh, projects };

@@ -1,110 +1,28 @@
-import { createNewTask, saveAndRefresh } from './projects.js';
-import { editTask } from './editTask.js';
-
-function renderTaskBox(
-  title = 'Task Title',
-  desc = 'Task Desc',
-  date = 'Task date',
-  priority = '',
-  objectReference,
-  projectReference
-) {
-  const taskBoxDiv = document.createElement('div');
-  taskBoxDiv.classList.add('task-box');
-  taskBoxDiv.addEventListener('click', toogleExtended);
-
-  const leftDiv = document.createElement('div');
-  leftDiv.classList.add('flex');
-
-  const checkBox = document.createElement('input');
-  checkBox.setAttribute('type', 'checkbox');
-
-  const leftInnerDiv = document.createElement('div');
-  const taskTitle = document.createElement('h2');
-  const taskDesc = document.createElement('p');
-
-  leftInnerDiv.appendChild(taskTitle);
-  leftInnerDiv.appendChild(taskDesc);
-
-  leftDiv.appendChild(checkBox);
-  leftDiv.appendChild(leftInnerDiv);
-
-  const rightDiv = document.createElement('div');
-  rightDiv.classList.add('flex', 'flex-align-center');
-
-  const priorityEl = document.createElement('div');
-  priorityEl.classList.add('priority', 'hidden');
-
-  const claendarIcon = document.createElement('i');
-  claendarIcon.classList.add('fa-solid', 'fa-calendar-days');
-  claendarIcon.style.color = '#2E2E2E';
-
-  const dateText = document.createElement('p');
-  dateText.classList.add('task-date');
-
-  const seeMore = document.createElement('div');
-  seeMore.classList.add('see-more');
-
-  const expandButton = document.createElement('i');
-  expandButton.classList.add('fa-solid', 'fa-chevron-down');
-
-  const editButton = document.createElement('i');
-  editButton.classList.add('fa-regular', 'fa-pen-to-square', 'hidden');
-  editButton.addEventListener('click', () => {
-    editTask(objectReference, projectReference);
-  });
-  editButton.addEventListener('dblclick', () => {
-    console.log(' DOUBLE CLCICKED ');
-
+/*
+projectReference.objects.indexOf(objectReference)
+    // Find the object in objects array
     projectReference.objects.splice(
       projectReference.objects.indexOf(objectReference),
       1
     );
-    saveAndRefresh();
-  });
 
-  seeMore.appendChild(expandButton);
-  seeMore.appendChild(editButton);
+*/
 
-  rightDiv.appendChild(priorityEl);
-  rightDiv.appendChild(claendarIcon);
-  rightDiv.appendChild(dateText);
-  rightDiv.appendChild(seeMore);
+import { projects, saveAndRefresh } from './projects.js';
+import { removeModal } from './ui.js';
 
-  taskBoxDiv.appendChild(leftDiv);
-  taskBoxDiv.appendChild(rightDiv);
-
-  // Set values
-  taskTitle.textContent = title;
-  taskDesc.textContent = desc;
-  priorityEl.textContent = priority;
-  dateText.textContent = date;
-
-  const taskView = document.querySelector('.task-view');
-
-  taskView.appendChild(taskBoxDiv);
-  console.log('BASTIK');
-}
-
-function toogleExtended(e) {
-  e.stopPropagation();
-  console.log('HELLO FROM I', e.target, this);
-  if (
-    e.target.classList.contains('task-box') ||
-    e.target.classList.contains('fa-chevron-down')
-  ) {
-    this.classList.toggle('task-box-extended');
-  }
-}
-
-function renderAddTaskModal(projectList) {
+function editTask(objectReference, projectReference) {
+  const title = objectReference.title;
+  const desc = objectReference.description;
+  const date = objectReference.dueDate;
+  const priority = objectReference.priority;
   // Modal
   const addTaskDiv = document.createElement('div');
   addTaskDiv.classList.add('modal');
 
   // Modal header
   const modalTitle = document.createElement('h2');
-  modalTitle.textContent = 'Add Task';
+  modalTitle.textContent = 'Edit Task';
 
   // Input div
   const inputDiv = document.createElement('div');
@@ -117,7 +35,7 @@ function renderAddTaskModal(projectList) {
   const titleInput = document.createElement('input');
   titleInput.type = 'text';
   titleInput.id = 'title-input';
-  titleInput.placeholder = 'Add a title';
+  titleInput.value = title;
   titleDiv.appendChild(titleLabel);
   titleDiv.appendChild(titleInput);
 
@@ -128,7 +46,7 @@ function renderAddTaskModal(projectList) {
   const descriptionInput = document.createElement('input');
   descriptionInput.type = 'text';
   descriptionInput.id = 'description-input';
-  descriptionInput.placeholder = 'Add a description';
+  descriptionInput.value = desc;
   descriptionDiv.appendChild(descriptionLabel);
   descriptionDiv.appendChild(descriptionInput);
 
@@ -139,7 +57,7 @@ function renderAddTaskModal(projectList) {
   const dateInput = document.createElement('input');
   dateInput.type = 'date';
   dateInput.id = 'date-input';
-  dateInput.placeholder = 'dd/mm/yyyy';
+  dateInput.value = date;
   dateDiv.appendChild(dateLabel);
   dateDiv.appendChild(dateInput);
 
@@ -149,6 +67,7 @@ function renderAddTaskModal(projectList) {
   priorityLabel.textContent = 'Priority';
   const priorityInput = document.createElement('select');
   priorityInput.id = 'priority-input';
+  priorityInput.value = priority;
   const lowP = document.createElement('option');
   lowP.value = 'low';
   lowP.textContent = 'Low';
@@ -178,8 +97,8 @@ function renderAddTaskModal(projectList) {
   projectDiv.appendChild(projectInput);
 
   // Loop through projects and get project names, make them an option
-  if (projectList != '') {
-    projectList.forEach((project) => {
+  if (projects != '') {
+    projects.forEach((project) => {
       const pName = project.projectName;
       const element = document.createElement('option');
       element.value = pName;
@@ -187,6 +106,8 @@ function renderAddTaskModal(projectList) {
       projectInput.appendChild(element);
     });
   }
+
+  projectInput.value = projectReference.projectName;
 
   // Append all the inputs to inputDiv
   inputDiv.appendChild(titleDiv);
@@ -206,7 +127,7 @@ function renderAddTaskModal(projectList) {
   const addTaskBtn = document.createElement('button');
   addTaskBtn.id = 'confirm-add-task';
   addTaskBtn.classList.add('btn');
-  addTaskBtn.textContent = 'Confirm';
+  addTaskBtn.textContent = 'Save';
   ////////////////////////////////////////////////////////////////// ADD TASK /////////////////////////////////////////////////////////////////////////////////////////////
   addTaskBtn.addEventListener('click', () => {
     // Input control
@@ -227,14 +148,12 @@ function renderAddTaskModal(projectList) {
       return;
     }
 
-    createNewTask(
-      projectInput.value,
-      titleInput.value,
-      descriptionInput.value,
-      dateInput.value,
-      priorityInput.value,
-      ''
-    );
+    objectReference.title = titleInput.value;
+    objectReference.description = descriptionInput.value;
+    objectReference.dueDate = dateInput.value;
+    objectReference.priority = priorityInput.value;
+
+    saveAndRefresh();
     removeModal();
   });
 
@@ -246,10 +165,30 @@ function renderAddTaskModal(projectList) {
   const addIcon = document.createElement('i');
   addIcon.classList = 'fa-solid fa-plus';
   addIcon.style.color = '#fff';
+  addIcon.style.marginRight = '0.25rem';
 
   addTaskBtn.appendChild(addIcon);
 
+  const removeTaskBtn = document.createElement('button');
+  removeTaskBtn.classList.add('btn-secondary');
+  removeTaskBtn.textContent = 'Remove Task';
+  removeTaskBtn.style.margin = '0 0.5rem';
+  removeTaskBtn.style.borderColor = '#FF6565';
+  removeTaskBtn.style.color = '#FF6565';
+
+  removeTaskBtn.addEventListener('click', () => {
+    if (confirm('Are you sure you want to delete this task?')) {
+      projectReference.objects.splice(
+        projectReference.objects.indexOf(objectReference),
+        1
+      );
+      saveAndRefresh();
+      removeModal();
+    }
+  });
+
   buttonsDiv.appendChild(cancelBtn);
+  buttonsDiv.appendChild(removeTaskBtn);
   buttonsDiv.appendChild(addTaskBtn);
 
   // Append childs to modal
@@ -260,8 +199,4 @@ function renderAddTaskModal(projectList) {
   document.body.appendChild(addTaskDiv);
 }
 
-function removeModal() {
-  document.querySelector('.modal').remove();
-}
-
-export { renderTaskBox, renderAddTaskModal, removeModal };
+export { editTask };
