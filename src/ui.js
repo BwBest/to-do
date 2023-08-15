@@ -1,3 +1,5 @@
+import { createNewTask } from './projects.js';
+
 function renderTaskBox(
   title = 'Task Title',
   desc = 'Task Desc',
@@ -190,6 +192,35 @@ function renderAddTaskModal(projectList) {
   addTaskBtn.id = 'confirm-add-task';
   addTaskBtn.classList.add('btn');
   addTaskBtn.textContent = 'Confirm';
+  ////////////////////////////////////////////////////////////////// ADD TASK /////////////////////////////////////////////////////////////////////////////////////////////
+  addTaskBtn.addEventListener('click', () => {
+    // Input control
+    let error = false;
+    if (titleInput.value == '') {
+      titleInput.style.borderBottomColor = 'red';
+      error = true;
+    }
+    if (descriptionInput.value == '') {
+      descriptionInput.style.borderBottomColor = 'red';
+      error = true;
+    }
+    if (dateInput.value == '') {
+      dateInput.style.borderBottomColor = 'red';
+      error = true;
+    }
+    if (error === true) {
+      return;
+    }
+
+    createNewTask(
+      projectInput.value,
+      titleInput.value,
+      descriptionInput.value,
+      dateInput.value,
+      priorityInput.value,
+      ''
+    );
+  });
 
   addTaskBtn.style.display = 'flex';
   addTaskBtn.style.flexDirection = 'row-reverse';

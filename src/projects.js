@@ -95,4 +95,4 @@ function addTaskMode() {
 // Event listeners
 document.querySelector('#add-task').addEventListener('click', addTaskMode);
 
-export { initalize };
+export { initalize, createNewTask };
