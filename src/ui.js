@@ -220,6 +220,7 @@ function renderAddTaskModal(projectList) {
       priorityInput.value,
       ''
     );
+    removeAddTaskModal();
   });
 
   addTaskBtn.style.display = 'flex';
@@ -244,4 +245,8 @@ function renderAddTaskModal(projectList) {
   document.body.appendChild(addTaskDiv);
 }
 
-export { renderTaskBox, renderAddTaskModal };
+function removeAddTaskModal() {
+  document.querySelector('.modal').remove();
+}
+
+export { renderTaskBox, renderAddTaskModal, removeAddTaskModal };
