@@ -8,7 +8,7 @@ projectReference.objects.indexOf(objectReference)
 
 */
 
-import { projects, saveAndRefresh } from './projects.js';
+import { projects, createNewTask, saveAndRefresh } from './projects.js';
 import { removeModal } from './ui.js';
 
 function editTask(objectReference, projectReference) {
@@ -152,6 +152,24 @@ function editTask(objectReference, projectReference) {
     objectReference.description = descriptionInput.value;
     objectReference.dueDate = dateInput.value;
     objectReference.priority = priorityInput.value;
+
+    // Transfer task to new project if needed
+    if (projectInput.value.toLowerCase() != projectReference.projectName) {
+      // Delete from old project
+      projectReference.objects.splice(
+        projectReference.objects.indexOf(objectReference),
+        1
+      );
+      // Create new task with edited values
+      createNewTask(
+        projectInput.value,
+        titleInput.value,
+        descriptionInput.value,
+        dateInput.value,
+        priorityInput.value,
+        ''
+      );
+    }
 
     saveAndRefresh();
     removeModal();
