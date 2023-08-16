@@ -1,5 +1,6 @@
 import { storage } from './saveSystem.js';
 import { renderAddTaskModal, renderTaskBox } from './ui.js';
+import { initalizeCategories } from './index.js';
 
 let projects = [];
 let loaded = false;
@@ -39,6 +40,13 @@ function firstTimeTest() {
   storage.save(projects);
 
   console.log('LOADED FIRST TIME');
+}
+
+function createNewProject(projectName = 'Project Name') {
+  const newProject = new Project(projectName);
+  projects.push(newProject);
+  saveAndRefresh();
+  initalizeCategories();
 }
 
 function createNewTask(project, title, description, dueDate, priority, notes) {
@@ -127,4 +135,4 @@ function saveAndRefresh() {
 // Event listeners
 document.querySelector('#add-task').addEventListener('click', addTaskMode);
 
-export { initalize, createNewTask, saveAndRefresh, projects };
+export { initalize, createNewTask, createNewProject, saveAndRefresh, projects };
