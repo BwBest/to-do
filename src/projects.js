@@ -1,6 +1,6 @@
 import { storage } from './saveSystem.js';
 import { renderAddTaskModal, renderTaskBox } from './ui.js';
-import { initalizeCategories } from './index.js';
+import { initalizeCategories, selectedCategory } from './index.js';
 
 let projects = [];
 let loaded = false;
@@ -88,18 +88,21 @@ function loadTasks() {
 
   // Render loaded tasks to page
   projects.forEach((project) => {
-    project.objects.forEach((task) => {
-      console.log(task);
-      console.log(project);
-      renderTaskBox(
-        task.title,
-        task.description,
-        task.dueDate,
-        task.priority,
-        task,
-        project
-      );
-    });
+    if (
+      selectedCategory.toLowerCase() == 'all' ||
+      selectedCategory.toLowerCase() == project.projectName.toLowerCase()
+    ) {
+      project.objects.forEach((task) => {
+        renderTaskBox(
+          task.title,
+          task.description,
+          task.dueDate,
+          task.priority,
+          task,
+          project
+        );
+      });
+    }
   });
 }
 
@@ -117,18 +120,21 @@ function saveAndRefresh() {
 
   // Render loaded tasks to page
   projects.forEach((project) => {
-    project.objects.forEach((task) => {
-      console.log(task);
-      console.log(project);
-      renderTaskBox(
-        task.title,
-        task.description,
-        task.dueDate,
-        task.priority,
-        task,
-        project
-      );
-    });
+    if (
+      selectedCategory.toLowerCase() == 'all' ||
+      selectedCategory.toLowerCase() == project.projectName.toLowerCase()
+    ) {
+      project.objects.forEach((task) => {
+        renderTaskBox(
+          task.title,
+          task.description,
+          task.dueDate,
+          task.priority,
+          task,
+          project
+        );
+      });
+    }
   });
 }
 
