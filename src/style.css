@@ -71,6 +71,8 @@ p{
     border: none;
     border-radius: 0.625rem;
     padding: 0.55rem 1.1rem;
+    transition: transform 0.15s linear;
+    transition: filter 0.15s linear;
 }
 
 .btn-secondary{
@@ -79,6 +81,17 @@ p{
     border: var(--secondary) 2px solid;
     border-radius: 0.625rem;
     padding: 0.55rem 1.1rem;
+}
+
+.btn:hover, .btn-secondary:hover{
+    transform: scale(1.05);
+    filter: brightness(1.1);
+    cursor: pointer;
+}
+
+.btn:active, .btn-secondary:active{
+    transform: scale(1);
+    filter: brightness(0.9);
 }
 
 /*************** LAYOUT ***************/
