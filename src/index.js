@@ -2,6 +2,33 @@ import './style.css';
 import * as todo from './projects.js';
 import { addProject } from './addProject.js';
 
+//+++++++++++++++++++++++++++ FILTER BY DATE ++++++++++++++++++++++++++++++
+let selectedDate = 'All';
+
+function initalizeDates() {
+  const dateFilterEl = document.querySelector('.view-type');
+  const dateButtons = [...dateFilterEl.children];
+
+  dateButtons.forEach((element) => {
+    element.addEventListener('click', () => {
+      changeActiveDate(element.textContent);
+
+      // Change colors of active and inactive category names
+      document.querySelectorAll('.view-type h3').forEach((ref) => {
+        ref.classList = 'white-text';
+      });
+      element.classList = 'active-text';
+    });
+  });
+}
+
+function changeActiveDate(newDate) {
+  selectedDate = newDate;
+  todo.refreshUI();
+}
+//--------------------------- FILTER BY DATE END ---------------------------
+
+//+++++++++++++++++++++++++++ CATEGORY SELECTION, INITALIZE-UPDATE CATEGORY, ADD CATEGORY +++++++++++++++++++++++++++
 let selectedCategory = 'All';
 
 // Update categories
@@ -50,8 +77,10 @@ function changeActiveCategory(newCat) {
 
 const addCategoryEl = document.querySelector('#add-category-button');
 addCategoryEl.addEventListener('click', addProject);
+//-------------------------------- CATEGORY SELECTION, INITALIZE-UPDATE CATEGORY, ADD CATEGORY END --------------------------------
 
 todo.initalize();
 initalizeCategories();
+initalizeDates();
 
-export { initalizeCategories, selectedCategory };
+export { initalizeCategories, selectedCategory, selectedDate };

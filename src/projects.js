@@ -1,6 +1,10 @@
 import { storage } from './saveSystem.js';
 import { renderAddTaskModal, renderTaskBox } from './ui.js';
-import { initalizeCategories, selectedCategory } from './index.js';
+import {
+  initalizeCategories,
+  selectedCategory,
+  selectedDate,
+} from './index.js';
 
 let projects = [];
 let loaded = false;
@@ -85,25 +89,7 @@ function loadTasks() {
   if (storage.isFirstTimeLoad() === true) return; // skip if it's the first time loading
   projects = storage.load();
   loaded = true;
-
-  // Render loaded tasks to page
-  projects.forEach((project) => {
-    if (
-      selectedCategory.toLowerCase() == 'all' ||
-      selectedCategory.toLowerCase() == project.projectName.toLowerCase()
-    ) {
-      project.objects.forEach((task) => {
-        renderTaskBox(
-          task.title,
-          task.description,
-          task.dueDate,
-          task.priority,
-          task,
-          project
-        );
-      });
-    }
-  });
+  refreshUI();
 }
 
 function addTaskMode() {
@@ -115,30 +101,85 @@ function addTaskMode() {
 
 function saveAndRefresh() {
   storage.save(projects);
+  refreshUI();
+}
 
+function refreshUI() {
   document.querySelector('.task-view').innerHTML = '';
 
   // Render loaded tasks to page
   projects.forEach((project) => {
-    if (
-      selectedCategory.toLowerCase() == 'all' ||
-      selectedCategory.toLowerCase() == project.projectName.toLowerCase()
-    ) {
+    // Filter by project
+    if (filterByProject(selectedCategory, project.projectName)) {
       project.objects.forEach((task) => {
-        renderTaskBox(
-          task.title,
-          task.description,
-          task.dueDate,
-          task.priority,
-          task,
-          project
-        );
+        //Filter by date
+        if (filterByDate(selectedDate, task.dueDate)) {
+          renderTaskBox(
+            task.title,
+            task.description,
+            task.dueDate,
+            task.priority,
+            task,
+            project
+          );
+        }
       });
     }
   });
 }
 
+function filterByProject(selectedProject, projectName) {
+  if (
+    selectedProject.toLowerCase() == 'all' ||
+    selectedProject.toLowerCase() == projectName.toLowerCase()
+  ) {
+    return true;
+  }
+}
+
+function filterByDate(selectedType, taskDueDate) {
+  let date = new Date();
+  let selectedTypeLower = selectedType.toLowerCase();
+
+  let taskDay = taskDueDate.substring(8, 10);
+  let taskMonth = taskDueDate.substring(5, 7);
+  let taskYear = taskDueDate.substring(0, 4);
+
+  if (selectedTypeLower == 'all') {
+    return true;
+  }
+  if (
+    selectedTypeLower == 'today' &&
+    date.getDate() == taskDay &&
+    date.getMonth() + 1 == taskMonth &&
+    date.getFullYear() == taskYear
+  ) {
+    return true;
+  }
+  if (
+    selectedTypeLower == 'this week' &&
+    date.getDate() - taskDay <= 7 &&
+    date.getFullYear() == taskYear
+  ) {
+    return true;
+  }
+  if (
+    selectedTypeLower == 'this month' &&
+    date.getMonth() + 1 == taskMonth &&
+    date.getFullYear() == taskYear
+  ) {
+    return true;
+  }
+}
+
 // Event listeners
 document.querySelector('#add-task').addEventListener('click', addTaskMode);
 
-export { initalize, createNewTask, createNewProject, saveAndRefresh, projects };
+export {
+  initalize,
+  createNewTask,
+  createNewProject,
+  refreshUI,
+  saveAndRefresh,
+  projects,
+};
