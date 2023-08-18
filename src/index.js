@@ -15,7 +15,7 @@ function addTaskMode() {
 //--------------------------- ADD TASK BUTTON END -------------------------
 
 //+++++++++++++++++++++++++++ FILTER BY DATE ++++++++++++++++++++++++++++++
-let selectedDate = 'All';
+let selectedDate = 'Today';
 
 function initalizeDates() {
   const dateFilterEl = document.querySelector('.view-type');
