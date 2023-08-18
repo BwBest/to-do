@@ -1,5 +1,5 @@
 import { storage } from './saveSystem.js';
-import { renderAddTaskModal, renderTaskBox } from './ui.js';
+import { renderTaskBox } from './ui.js';
 import {
   initalizeCategories,
   selectedCategory,
@@ -92,13 +92,6 @@ function loadTasks() {
   refreshUI();
 }
 
-function addTaskMode() {
-  if (loaded == false) {
-    return;
-  }
-  renderAddTaskModal(projects);
-}
-
 function saveAndRefresh() {
   storage.save(projects);
   refreshUI();
@@ -172,9 +165,6 @@ function filterByDate(selectedType, taskDueDate) {
   }
 }
 
-// Event listeners
-document.querySelector('#add-task').addEventListener('click', addTaskMode);
-
 export {
   initalize,
   createNewTask,
@@ -182,4 +172,5 @@ export {
   refreshUI,
   saveAndRefresh,
   projects,
+  loaded,
 };

@@ -1,6 +1,18 @@
 import './style.css';
 import * as todo from './projects.js';
 import { addProject } from './addProject.js';
+import { renderAddTaskModal } from './addTask.js';
+
+//+++++++++++++++++++++++++++ ADD TASK BUTTON +++++++++++++++++++++++++++++
+document.querySelector('#add-task').addEventListener('click', addTaskMode);
+
+function addTaskMode() {
+  if (todo.loaded == false) {
+    return;
+  }
+  renderAddTaskModal(todo.projects);
+}
+//--------------------------- ADD TASK BUTTON END -------------------------
 
 //+++++++++++++++++++++++++++ FILTER BY DATE ++++++++++++++++++++++++++++++
 let selectedDate = 'All';
