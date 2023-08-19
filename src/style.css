@@ -85,7 +85,7 @@ p{
 
 .btn:hover, .btn-secondary:hover{
     transform: translateY(-1px);
-    filter: brightness(1.1);
+    filter: brightness(1.2);
     cursor: pointer;
 }
 
