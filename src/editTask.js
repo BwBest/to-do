@@ -123,6 +123,9 @@ function editTask(objectReference, projectReference) {
   const cancelBtn = document.createElement('button');
   cancelBtn.textContent = 'Cancel';
   cancelBtn.classList.add('btn-secondary');
+  cancelBtn.addEventListener('click', () => {
+    removeModal();
+  });
 
   const addTaskBtn = document.createElement('button');
   addTaskBtn.id = 'confirm-add-task';
