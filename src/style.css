@@ -408,3 +408,18 @@ input[type="checkbox"]{
     color: var(--primary) !important;
     filter: brightness(1.1);
 }
+
+.category-edit-btn{
+    color: var(--white-bg);
+    transition: all 0.15s linear;
+}
+
+.category-edit-btn:hover{
+    filter: brightness(1.2);
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+.category-edit-btn:active{
+    transform: translateY(1px);
+}

@@ -2,6 +2,7 @@ import './style.css';
 import * as todo from './projects.js';
 import { addProject } from './addProject.js';
 import { renderAddTaskModal } from './addTask.js';
+import { editProject } from './editProject.js';
 
 //+++++++++++++++++++++++++++ ADD TASK BUTTON +++++++++++++++++++++++++++++
 document.querySelector('#add-task').addEventListener('click', addTaskMode);
@@ -59,29 +60,49 @@ function initalizeCategories() {
 
   h3.addEventListener('click', () => {
     changeActiveCategory(h3.textContent);
-
-    // Change colors of active and inactive category names
-    document.querySelectorAll('#projects h3').forEach((ref) => {
-      ref.classList = 'white-text';
-    });
+    resetOtherCategories();
     h3.classList = 'active-text';
   });
 
+  // Create category elements from storage
   todo.projects.forEach((project) => {
+    const wrapper = document.createElement('div');
+    wrapper.style.display = 'flex';
+    wrapper.style.alignItems = 'center';
+    wrapper.style.justifyContent = 'space-between';
+
     const h3 = document.createElement('h3');
     h3.textContent = project.projectName;
     h3.classList.add('white-text');
-    categoriesEl.appendChild(h3);
+
+    const editBtn = document.createElement('i');
+    editBtn.classList = 'category-edit-btn fa-regular fa-pen-to-square hidden';
+
+    wrapper.appendChild(h3);
+    wrapper.appendChild(editBtn);
+
+    categoriesEl.appendChild(wrapper);
 
     h3.addEventListener('click', () => {
       changeActiveCategory(h3.textContent);
-
-      // Change colors of active and inactive category names
-      document.querySelectorAll('#projects h3').forEach((ref) => {
-        ref.classList = 'white-text';
-      });
+      resetOtherCategories();
       h3.classList = 'active-text';
+      editBtn.classList.remove('hidden');
     });
+
+    editBtn.addEventListener('click', () => {
+      editProject(project);
+    });
+  });
+}
+
+function resetOtherCategories() {
+  // Change colors of active and inactive category names and hide edit buttons
+  document.querySelectorAll('#projects h3').forEach((ref) => {
+    ref.classList = 'white-text';
+  });
+  document.querySelectorAll('#projects i').forEach((ref) => {
+    ref.classList.add('hidden');
   });
 }
 
@@ -100,4 +121,9 @@ todo.initalize();
 initalizeCategories();
 initalizeDates();
 
-export { initalizeCategories, selectedCategory, selectedDate };
+export {
+  initalizeCategories,
+  selectedCategory,
+  selectedDate,
+  changeActiveCategory,
+};
