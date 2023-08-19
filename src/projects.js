@@ -76,8 +76,8 @@ function createNewTask(project, title, description, dueDate, priority, notes) {
   }
   // Save the task and projects
   storage.save(projects);
-  // Render the task
-  renderTaskBox(title, description, dueDate, priority, task, assignedProject);
+  // Refresh ui
+  refreshUI();
 }
 
 function initalize() {
