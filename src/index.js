@@ -16,6 +16,7 @@ function addTaskMode() {
 
 //+++++++++++++++++++++++++++ FILTER BY DATE ++++++++++++++++++++++++++++++
 let selectedDate = 'Today';
+const dateTitle = document.querySelector('#title');
 
 function initalizeDates() {
   const dateFilterEl = document.querySelector('.view-type');
@@ -30,6 +31,8 @@ function initalizeDates() {
         ref.classList = 'white-text';
       });
       element.classList = 'active-text';
+
+      dateTitle.textContent = element.textContent;
     });
   });
 }
@@ -90,6 +93,8 @@ function changeActiveCategory(newCat) {
 const addCategoryEl = document.querySelector('#add-category-button');
 addCategoryEl.addEventListener('click', addProject);
 //-------------------------------- CATEGORY SELECTION, INITALIZE-UPDATE CATEGORY, ADD CATEGORY END --------------------------------
+
+//
 
 todo.initalize();
 initalizeCategories();
