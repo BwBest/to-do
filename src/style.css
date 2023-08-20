@@ -114,7 +114,7 @@ p{
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: normal;
 }
 
 #right{
@@ -143,16 +143,16 @@ p{
     padding: 0 0.5rem;
 }
 
-.task-view::-webkit-scrollbar {
+.task-view::-webkit-scrollbar, .categories::-webkit-scrollbar{
     width: 6px;
 }
   
-.task-view::-webkit-scrollbar-track {
+.task-view::-webkit-scrollbar-track, .categories::-webkit-scrollbar-track{
     background-color: #e6e6e6;
     border-radius: 10px;
 }
   
-.task-view::-webkit-scrollbar-thumb {
+.task-view::-webkit-scrollbar-thumb, .categories::-webkit-scrollbar-thumb{
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #dfdfdf;
     border-radius: 20px;
@@ -359,10 +359,11 @@ input[type="checkbox"]{
     color: white;
 }
 
-/* .profile{
-
-} */
 /* Profile section end*/
+
+.profile, .view-type{
+    margin-bottom: 2rem;
+}
 
 /* View type section */
 .view-type h3, #projects h3{
@@ -385,7 +386,9 @@ input[type="checkbox"]{
 /* Categories section*/
 
 .categories{
-    margin-bottom: 20vh;
+    /* margin-bottom: 20vh; */
+    overflow-y: scroll;
+    padding-right: 1rem;
 }
 
 .categories-title{
@@ -406,6 +409,11 @@ input[type="checkbox"]{
 
     margin-top: 0.1rem;
     margin-bottom: 1rem;
+}
+
+.categories h3{
+    max-width: 10vw;
+    word-wrap: break-word;
 }
 
 #add-category-button{
@@ -484,15 +492,15 @@ input[type="checkbox"]{
 } */
 
 .error{
-    background: #FFC1C1;
-    color: #FF3535;
-    border-color: #FF6363;
+    background: #f5b5b5;
+    color: #eb2d2d;
+    border-color: #c44c4c;
 }
 
 .success{
-    background: #c6ffc1;
-    color: #019c01;
-    border-color: #70ff63;
+    background: #ccebc9;
+    color: #018a01;
+    border-color: #52bb49;
 }
 /* Message box end */
 

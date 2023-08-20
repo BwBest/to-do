@@ -74,6 +74,7 @@ function initalizeCategories() {
     const h3 = document.createElement('h3');
     h3.textContent = project.projectName;
     h3.classList.add('white-text');
+    h3.style.marginBottom = '0.25rem';
 
     const editBtn = document.createElement('i');
     editBtn.classList = 'category-edit-btn fa-regular fa-pen-to-square hidden';
