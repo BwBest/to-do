@@ -22,6 +22,8 @@ function renderTaskBox(
   const taskTitle = document.createElement('h2');
   const taskDesc = document.createElement('p');
 
+  leftInnerDiv.classList.add('task-desc');
+
   leftInnerDiv.appendChild(taskTitle);
   leftInnerDiv.appendChild(taskDesc);
 

@@ -306,7 +306,7 @@ input[type="checkbox"]{
 .task-desc{
     max-width: 25vw;
     display: block;
-    overflow: hidden;
+    overflow: hidden !important;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
@@ -317,13 +317,22 @@ input[type="checkbox"]{
     box-shadow: 10px 12px 13px 1px rgba(142, 142, 142, 0.05);
 }
 
+.task-box-extended h2{
+    max-width: 40vw;
+    max-height: auto;
+    display: block;
+    overflow:visible;
+    white-space:normal;
+    text-overflow: clip;
+}
+
 .task-box-extended p{
     max-width: 40vw;
-    max-width: auto;
+    max-height: auto;
     display: block;
-    overflow: normal;
-    white-space: normal;
-    text-overflow: ellipsis;
+    overflow:visible;
+    white-space:normal;
+    text-overflow: clip;
 }
 
 .task-box-extended .hidden{
