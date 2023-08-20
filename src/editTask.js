@@ -12,6 +12,9 @@ import { projects, createNewTask, saveAndRefresh } from './projects.js';
 import { removeModal, renderMessage } from './ui.js';
 
 function editTask(objectReference, projectReference) {
+  document.documentElement.style.setProperty('--bg-block-opacity', 0.5);
+  document.documentElement.style.setProperty('--bg-block-z-index', 0);
+
   const title = objectReference.title;
   const desc = objectReference.description;
   const date = objectReference.dueDate;

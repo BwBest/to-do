@@ -2,6 +2,10 @@ import { createNewTask } from './projects.js';
 import { removeModal, renderMessage } from './ui.js';
 
 function renderAddTaskModal(projectList) {
+  // Block background
+  document.documentElement.style.setProperty('--bg-block-opacity', 0.5);
+  document.documentElement.style.setProperty('--bg-block-z-index', 0);
+
   // Modal
   const addTaskDiv = document.createElement('div');
   addTaskDiv.classList.add('modal');

@@ -5,6 +5,8 @@
     --white-bg: #F9F9F9;
     --primary: #FF9838;
     --secondary: #2E2E2E;
+    --bg-block-opacity: 0;
+    --bg-block-z-index: -1;
 }
 
 *{
@@ -457,6 +459,8 @@ input[type="checkbox"]{
     border: #FF6565 solid 2px;
     border-radius: 8px;
     animation: slideIn 0.4s linear 1 normal forwards;
+
+    z-index: 3;
 }
 
 .msg-div-out{
@@ -519,4 +523,17 @@ input[type="checkbox"]{
     margin-top: 2rem;
     text-align: center;
     color:#5e5e5e;
+}
+
+/* Blocking layer */
+.container::before{
+    content: " ";
+    position: absolute;
+    width: 100%; 
+    height:100%;
+    top:0; 
+    left:0;
+    background:rgba(0,0,0,var(--bg-block-opacity));
+    opacity: 1;
+    z-index: var(--bg-block-z-index);
 }

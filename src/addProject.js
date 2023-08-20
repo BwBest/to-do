@@ -3,6 +3,9 @@ import { changeActiveCategory } from './index.js';
 import { removeModal, renderMessage } from './ui.js';
 
 function addProject() {
+  document.documentElement.style.setProperty('--bg-block-opacity', 0.5);
+  document.documentElement.style.setProperty('--bg-block-z-index', 0);
+
   // Modal
   const addTaskDiv = document.createElement('div');
   addTaskDiv.classList.add('modal');

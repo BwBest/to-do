@@ -158,6 +158,8 @@ function toogleExtended(e) {
 
 function removeModal() {
   document.querySelector('.modal').remove();
+  document.documentElement.style.setProperty('--bg-block-opacity', 0);
+  document.documentElement.style.setProperty('--bg-block-z-index', -1);
 }
 
 export { renderTaskBox, removeModal, renderMessage };

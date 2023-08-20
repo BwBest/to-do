@@ -5,6 +5,9 @@ import { removeModal, renderMessage } from './ui.js';
 function editProject(projectReference) {
   const projectName = projectReference.projectName;
 
+  document.documentElement.style.setProperty('--bg-block-opacity', 0.5);
+  document.documentElement.style.setProperty('--bg-block-z-index', 0);
+
   // Modal
   const addTaskDiv = document.createElement('div');
   addTaskDiv.classList.add('modal');
