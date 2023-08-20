@@ -54,21 +54,16 @@ function renderAddTaskModal(projectList) {
   const priorityInput = document.createElement('select');
   priorityInput.id = 'priority-input';
   const lowP = document.createElement('option');
-  lowP.value = 'low';
-  lowP.textContent = 'Low';
-
-  const medP = document.createElement('option');
-  medP.value = 'medium';
-  medP.textContent = 'Medium';
+  lowP.value = 'none';
+  lowP.textContent = 'None';
 
   const higP = document.createElement('option');
-  higP.value = 'high';
-  higP.textContent = 'High';
+  higP.value = 'important';
+  higP.textContent = 'Important';
 
   priorityDiv.appendChild(priorityLabel);
   priorityDiv.appendChild(priorityInput);
   priorityInput.appendChild(lowP);
-  priorityInput.appendChild(medP);
   priorityInput.appendChild(higP);
 
   // Project input

@@ -1,4 +1,3 @@
-import { saveAndRefresh } from './projects.js';
 import { editTask } from './editTask.js';
 
 function renderTaskBox(
@@ -53,15 +52,6 @@ function renderTaskBox(
   editButton.addEventListener('click', () => {
     editTask(objectReference, projectReference);
   });
-  editButton.addEventListener('dblclick', () => {
-    console.log(' DOUBLE CLCICKED ');
-
-    projectReference.objects.splice(
-      projectReference.objects.indexOf(objectReference),
-      1
-    );
-    saveAndRefresh();
-  });
 
   seeMore.appendChild(expandButton);
   seeMore.appendChild(editButton);
@@ -79,6 +69,11 @@ function renderTaskBox(
   taskDesc.textContent = desc;
   priorityEl.textContent = priority;
   dateText.textContent = date;
+
+  if (priority == 'important') {
+    priorityEl.classList.remove('hidden');
+    priorityEl.style.textTransform = 'capitalize';
+  }
 
   const taskView = document.querySelector('.task-view');
 
@@ -141,6 +136,8 @@ function toogleExtended(e) {
     e.target.classList.contains('fa-chevron-down')
   ) {
     this.classList.toggle('task-box-extended');
+    this.querySelector('.fa-chevron-down').classList.toggle('fa-rotate-180');
+    this.querySelector('.fa-pen-to-square').classList.toggle('hidden');
   }
 }
 
