@@ -14,12 +14,12 @@ function Project(projectName) {
   this.objects = [];
 }
 
-function Task(title, description, dueDate, priority, notes) {
+function Task(title, description, dueDate, priority, completed) {
   this.title = title;
   this.description = description;
   this.dueDate = dueDate;
   this.priority = priority;
-  this.notes = notes;
+  this.completed = completed;
 }
 
 function firstTimeTest() {
@@ -33,11 +33,11 @@ function firstTimeTest() {
   // Create a example task
   createNewTask(
     'Default Project',
-    'Başlık',
-    'Deneme açıklaması',
-    '2bdone',
-    'high',
-    'Gelirse ekime'
+    'Awesome Task',
+    'This is an example task for you to edit',
+    '2023-08-20',
+    'important',
+    'false'
   );
 
   // Save the task and project
@@ -53,15 +53,22 @@ function createNewProject(projectName = 'Project Name') {
   initalizeCategories();
 }
 
-function createNewTask(project, title, description, dueDate, priority, notes) {
+function createNewTask(
+  project,
+  title,
+  description,
+  dueDate,
+  priority,
+  completed
+) {
   if (loaded === false) {
     // Call the newtask function 1s later if the saves not loaded yet
     setTimeout(() => {
-      createNewTask(project, title, description, dueDate, priority, notes);
+      createNewTask(project, title, description, dueDate, priority, completed);
     }, 1000);
     return;
   }
-  const task = new Task(title, description, dueDate, priority, notes);
+  const task = new Task(title, description, dueDate, priority, completed);
   // Find the project object
   let assignedProject;
   projects.forEach((element) => {

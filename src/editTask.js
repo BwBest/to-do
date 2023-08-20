@@ -170,7 +170,7 @@ function editTask(objectReference, projectReference) {
         descriptionInput.value,
         dateInput.value,
         priorityInput.value,
-        ''
+        objectReference.completed
       );
     }
     renderMessage.success('Task saved!');

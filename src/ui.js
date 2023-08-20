@@ -1,4 +1,5 @@
 import { editTask } from './editTask.js';
+import { saveAndRefresh } from './projects.js';
 
 function renderTaskBox(
   title = 'Task Title',
@@ -17,6 +18,21 @@ function renderTaskBox(
 
   const checkBox = document.createElement('input');
   checkBox.setAttribute('type', 'checkbox');
+  if (objectReference.completed == true) {
+    checkBox.checked = true;
+    taskBoxDiv.classList.add('task-done');
+  }
+  checkBox.addEventListener('change', () => {
+    if (checkBox.checked) {
+      taskBoxDiv.classList.add('task-done');
+      objectReference.completed = true;
+      saveAndRefresh();
+    } else {
+      taskBoxDiv.classList.remove('task-done');
+      objectReference.completed = false;
+      saveAndRefresh();
+    }
+  });
 
   const leftInnerDiv = document.createElement('div');
   const taskTitle = document.createElement('h2');
