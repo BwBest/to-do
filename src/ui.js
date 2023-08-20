@@ -136,6 +136,4 @@ function removeModal() {
   document.querySelector('.modal').remove();
 }
 
-renderMessage.error('EBÊN');
-
-export { renderTaskBox, removeModal };
+export { renderTaskBox, removeModal, renderMessage };
