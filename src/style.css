@@ -387,7 +387,7 @@ input[type="checkbox"]{
 
 .categories{
     /* margin-bottom: 20vh; */
-    overflow-y: scroll;
+    overflow-y: auto;
     padding-right: 1rem;
 }
 
