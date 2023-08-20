@@ -145,6 +145,7 @@ function renderAddTaskModal(projectList) {
       priorityInput.value,
       ''
     );
+    renderMessage.success('Task created!');
     removeModal();
   });
 

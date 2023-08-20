@@ -9,7 +9,7 @@ projectReference.objects.indexOf(objectReference)
 */
 
 import { projects, createNewTask, saveAndRefresh } from './projects.js';
-import { removeModal } from './ui.js';
+import { removeModal, renderMessage } from './ui.js';
 
 function editTask(objectReference, projectReference) {
   const title = objectReference.title;
@@ -173,7 +173,7 @@ function editTask(objectReference, projectReference) {
         ''
       );
     }
-
+    renderMessage.success('Task saved!');
     saveAndRefresh();
     removeModal();
   });
@@ -205,6 +205,7 @@ function editTask(objectReference, projectReference) {
       );
       saveAndRefresh();
       removeModal();
+      renderMessage.success('Task deleted!');
     }
   });
 

@@ -1,5 +1,5 @@
 import { createNewProject, projects, saveAndRefresh } from './projects.js';
-import { removeModal } from './ui.js';
+import { removeModal, renderMessage } from './ui.js';
 
 function addProject() {
   // Modal
@@ -51,10 +51,12 @@ function addProject() {
       error = true;
     }
     if (error === true) {
+      renderMessage.error('Plase enter a valid category name');
       return;
     }
 
     createNewProject(titleInput.value);
+    renderMessage.success('Category created!');
     removeModal();
   });
 

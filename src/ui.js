@@ -113,6 +113,7 @@ function MessageBox() {
     this.msgIcon.classList = 'msg-icon fa-solid fa-circle-check fa-lg';
     this.msgText.classList = 'msg-msg success';
     this.msgText.textContent = text;
+    this.clearTimer();
   };
 
   this.timerRef = undefined;
@@ -126,7 +127,7 @@ function MessageBox() {
         this.msgDiv.classList.add('hidden');
         this.msgText.textContent = '';
       }, 400);
-    }, 4000);
+    }, 2500);
   };
 }
 

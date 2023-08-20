@@ -1,6 +1,6 @@
 import { projects, saveAndRefresh } from './projects.js';
 import { changeActiveCategory, initalizeCategories } from './index.js';
-import { removeModal } from './ui.js';
+import { removeModal, renderMessage } from './ui.js';
 
 function editProject(projectReference) {
   const projectName = projectReference.projectName;
@@ -55,6 +55,7 @@ function editProject(projectReference) {
       error = true;
     }
     if (error === true) {
+      renderMessage.error('Plase enter a valid category name');
       return;
     }
 
@@ -63,6 +64,7 @@ function editProject(projectReference) {
     saveAndRefresh();
     initalizeCategories();
     removeModal();
+    renderMessage.success('Category saved!');
   });
 
   addTaskBtn.style.display = 'flex';
