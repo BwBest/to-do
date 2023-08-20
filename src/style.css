@@ -62,7 +62,7 @@ p{
 }
  
 .hidden{
-    display: none;
+    display: none !important;
 }
 
 .btn{
@@ -422,4 +422,66 @@ input[type="checkbox"]{
 
 .category-edit-btn:active{
     transform: translateY(1px);
+}
+
+/* Category section end */
+
+/* Message box */
+.msg-div{
+    position: fixed;
+    top: 0vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 3rem;
+
+    background: var(--body-bg);
+    border: #FF6565 solid 2px;
+    border-radius: 8px;
+    animation: slideIn 0.4s linear 1 normal forwards;
+}
+
+.msg-div-out{
+    animation: slideOut 0.3s linear normal forwards;
+}
+
+@keyframes slideIn {
+    from{
+        opacity: 0;
+    }
+    to{
+        transform: translateY(10vh);
+        opacity: 1;
+    }
+}
+@keyframes slideOut {
+    to{
+        opacity: 0;
+        transform: translateY(0);
+    }
+    from{
+        transform: translateY(10vh);
+        opacity: 1;
+    }
+}
+
+.msg-icon{
+    margin-right: 0.5rem;
+}
+
+/* .msg-msg{
+
+} */
+
+.error{
+    background: #FFC1C1;
+    color: #FF3535;
+    border-color: #FF6363;
+}
+
+.success{
+    background: #c6ffc1;
+    color: #019c01;
+    border-color: #70ff63;
 }

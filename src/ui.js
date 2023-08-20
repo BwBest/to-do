@@ -1,4 +1,4 @@
-import { createNewTask, saveAndRefresh } from './projects.js';
+import { saveAndRefresh } from './projects.js';
 import { editTask } from './editTask.js';
 
 function renderTaskBox(
@@ -86,6 +86,41 @@ function renderTaskBox(
   console.log('BASTIK');
 }
 
+const renderMessage = (() => {
+  const msgDiv = document.querySelector('.msg-div');
+  const msgIcon = document.querySelector('.msg-icon');
+  const msgText = document.querySelector('.msg-msg');
+  const error = (text) => {
+    msgDiv.classList = 'msg-div error';
+    msgIcon.classList = 'msg-icon fa-solid fa-circle-exclamation fa-lg';
+    msgText.classList = 'msg-msg error';
+    msgText.textContent = text;
+    clearTimer();
+  };
+
+  const success = (text) => {
+    msgDiv.classList = 'msg-div success';
+    msgIcon.classList = 'msg-icon fa-solid fa-circle-check fa-lg';
+    msgText.classList = 'msg-msg success';
+    msgDiv.classList.add('msg-div-out');
+    msgText.textContent = text;
+  };
+
+  const clearTimer = () => {
+    setTimeout(() => {
+      // Slideout animation
+      msgDiv.classList.add('msg-div-out');
+      // Add hidden class and clear msg after animation finishes
+      setTimeout(() => {
+        msgDiv.classList.add('hidden');
+        msgText.textContent = '';
+      }, 400);
+    }, 4000);
+  };
+
+  return { error, success };
+})();
+
 function toogleExtended(e) {
   e.stopPropagation();
   console.log('HELLO FROM I', e.target, this);
@@ -100,5 +135,7 @@ function toogleExtended(e) {
 function removeModal() {
   document.querySelector('.modal').remove();
 }
+
+renderMessage.error('EBÊN');
 
 export { renderTaskBox, removeModal };
