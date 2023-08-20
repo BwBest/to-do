@@ -1,5 +1,5 @@
 import { createNewTask } from './projects.js';
-import { removeModal } from './ui.js';
+import { removeModal, renderMessage } from './ui.js';
 
 function renderAddTaskModal(projectList) {
   // Modal
@@ -133,6 +133,7 @@ function renderAddTaskModal(projectList) {
       error = true;
     }
     if (error === true) {
+      renderMessage.error('Please check your input values');
       return;
     }
 

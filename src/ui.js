@@ -86,40 +86,51 @@ function renderTaskBox(
   console.log('BASTIK');
 }
 
-const renderMessage = (() => {
-  const msgDiv = document.querySelector('.msg-div');
-  const msgIcon = document.querySelector('.msg-icon');
-  const msgText = document.querySelector('.msg-msg');
-  const error = (text) => {
-    msgDiv.classList = 'msg-div error';
-    msgIcon.classList = 'msg-icon fa-solid fa-circle-exclamation fa-lg';
-    msgText.classList = 'msg-msg error';
-    msgText.textContent = text;
-    clearTimer();
+function MessageBox() {
+  this.msgDiv = document.querySelector('.msg-div');
+  this.msgIcon = document.querySelector('.msg-icon');
+  this.msgText = document.querySelector('.msg-msg');
+  this.error = function (text) {
+    if (this.timerRef != undefined) {
+      clearTimeout(this.timerRef);
+      this.timerRef = undefined;
+    }
+
+    this.msgDiv.classList = 'msg-div error';
+    this.msgIcon.classList = 'msg-icon fa-solid fa-circle-exclamation fa-lg';
+    this.msgText.classList = 'msg-msg error';
+    this.msgText.textContent = text;
+    this.clearTimer();
   };
 
-  const success = (text) => {
-    msgDiv.classList = 'msg-div success';
-    msgIcon.classList = 'msg-icon fa-solid fa-circle-check fa-lg';
-    msgText.classList = 'msg-msg success';
-    msgDiv.classList.add('msg-div-out');
-    msgText.textContent = text;
+  this.success = function (text) {
+    if (this.timerRef != undefined) {
+      clearTimeout(this.timerRef);
+      this.timerRef = undefined;
+    }
+
+    this.msgDiv.classList = 'msg-div success';
+    this.msgIcon.classList = 'msg-icon fa-solid fa-circle-check fa-lg';
+    this.msgText.classList = 'msg-msg success';
+    this.msgText.textContent = text;
   };
 
-  const clearTimer = () => {
-    setTimeout(() => {
+  this.timerRef = undefined;
+
+  this.clearTimer = function () {
+    this.timerRef = setTimeout(() => {
       // Slideout animation
-      msgDiv.classList.add('msg-div-out');
+      this.msgDiv.classList.add('msg-div-out');
       // Add hidden class and clear msg after animation finishes
       setTimeout(() => {
-        msgDiv.classList.add('hidden');
-        msgText.textContent = '';
+        this.msgDiv.classList.add('hidden');
+        this.msgText.textContent = '';
       }, 400);
     }, 4000);
   };
+}
 
-  return { error, success };
-})();
+const renderMessage = new MessageBox();
 
 function toogleExtended(e) {
   e.stopPropagation();
