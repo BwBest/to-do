@@ -42,8 +42,6 @@ function firstTimeTest() {
 
   // Save the task and project
   storage.save(projects);
-
-  console.log('LOADED FIRST TIME');
 }
 
 function createNewProject(projectName = 'Project Name') {
@@ -79,7 +77,6 @@ function createNewTask(
   // Add task to project object if the 'project' input is available
   if (assignedProject !== null) {
     let test = assignedProject.objects.push(task);
-    console.log(test);
   }
   // Save the task and projects
   storage.save(projects);

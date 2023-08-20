@@ -94,9 +94,7 @@ function renderTaskBox(
   }
 
   const taskView = document.querySelector('.task-view');
-
   taskView.appendChild(taskBoxDiv);
-  console.log('BASTIK');
 }
 
 function MessageBox() {
@@ -148,7 +146,6 @@ const renderMessage = new MessageBox();
 
 function toogleExtended(e) {
   e.stopPropagation();
-  console.log('HELLO FROM I', e.target, this);
   if (
     e.target.classList.contains('task-box') ||
     e.target.classList.contains('fa-chevron-down')
