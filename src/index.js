@@ -85,9 +85,6 @@ function initalizeCategories() {
 
     h3.addEventListener('click', () => {
       changeActiveCategory(h3.textContent);
-      resetOtherCategories();
-      h3.classList = 'active-text';
-      editBtn.classList.remove('hidden');
     });
 
     editBtn.addEventListener('click', () => {
@@ -108,6 +105,15 @@ function resetOtherCategories() {
 
 function changeActiveCategory(newCat) {
   selectedCategory = newCat;
+  resetOtherCategories();
+  document.querySelectorAll('#projects div').forEach((ref) => {
+    const h3 = ref.querySelector('h3');
+    const icon = ref.querySelector('i');
+    if (h3.textContent == newCat) {
+      h3.classList = 'active-text';
+      icon.classList.remove('hidden');
+    }
+  });
   todo.saveAndRefresh();
 }
 

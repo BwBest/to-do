@@ -60,9 +60,9 @@ function editProject(projectReference) {
     }
 
     projectReference.projectName = titleInput.value;
-
     saveAndRefresh();
     initalizeCategories();
+    changeActiveCategory(titleInput.value);
     removeModal();
     renderMessage.success('Category saved!');
   });
@@ -93,6 +93,7 @@ function editProject(projectReference) {
       saveAndRefresh();
       initalizeCategories();
       removeModal();
+      renderMessage.success('Category removed');
     }
   });
 
