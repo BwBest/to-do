@@ -485,3 +485,21 @@ input[type="checkbox"]{
     color: #019c01;
     border-color: #70ff63;
 }
+/* Message box end */
+
+/* Empty taskview message*/
+
+.empty-text-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #5e5e5e;
+}
+
+.empty-text{
+    margin-top: 2rem;
+    text-align: center;
+    color:#5e5e5e;
+}

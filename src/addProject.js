@@ -1,4 +1,5 @@
 import { createNewProject, projects, saveAndRefresh } from './projects.js';
+import { changeActiveCategory } from './index.js';
 import { removeModal, renderMessage } from './ui.js';
 
 function addProject() {
@@ -57,6 +58,7 @@ function addProject() {
 
     createNewProject(titleInput.value);
     renderMessage.success('Category created!');
+    changeActiveCategory(titleInput.value);
     removeModal();
   });
 

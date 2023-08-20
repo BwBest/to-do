@@ -119,6 +119,10 @@ function refreshUI() {
       });
     }
   });
+
+  if (document.querySelector('.task-view').innerHTML == '') {
+    emptyText();
+  }
 }
 
 function filterByProject(selectedProject, projectName) {
@@ -163,6 +167,22 @@ function filterByDate(selectedType, taskDueDate) {
   ) {
     return true;
   }
+}
+
+function emptyText() {
+  const div = document.createElement('div');
+  div.classList.add('empty-text-div');
+
+  const icon = document.createElement('i');
+  icon.classList = 'fa-regular fa-face-frown fa-2xl';
+
+  const p = document.createElement('p');
+  p.classList.add('empty-text');
+  p.textContent = 'Seems like there is no task here, start by adding one!';
+
+  div.appendChild(icon);
+  div.appendChild(p);
+  document.querySelector('.task-view').appendChild(div);
 }
 
 export {
